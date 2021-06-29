@@ -1,32 +1,45 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Todo.css'
 
 
 function Todo() {
 
     const [text, setText] = useState("");
+    const [items, setItems] = useState([]);
 
     function handleChange(event) {
-        console.log(event)
         let t = event.target.value;
         setText(t)
-
     }
+
+
+    function addItem(event) {
+        event.preventDefault(); //este metodo evita que o button dentro do form envie para o action;
+        if (text) {
+            setItems([...items, text])
+            console.log(items)
+            setText("");
+        }
+    }
+
 
     return (
         <div className="container">
-            <h1>Teste</h1>
+            <h1>To Do</h1>
             <form>
-                <input onChange={handleChange} type="text" />
-                <button>Add</button>
+                <input onChange={handleChange} type="text" value={text} />
+                <button onClick={addItem}>Add</button>
             </form>
 
-            <ul>
-                <li>{text}</li>
+            <ul >
+                {items.map((item, i) => {
+                    return (
+                        <li key={i}>{item}</li>
+                    )
+                })}
             </ul>
-        </div>
 
-    )
+        </div>)
 
 }
 
