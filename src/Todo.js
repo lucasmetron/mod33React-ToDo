@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './Todo.css'
+import List from './List';
 
 
 function Todo() {
@@ -30,21 +31,10 @@ function Todo() {
                 <input onChange={handleChange} type="text" value={text} />
                 <button onClick={addItem}>Add</button>
             </form>
-
-            <ul >
-                {items.map((item, i) => {
-                    return (
-                        <li key={i}>{item}</li>
-                    )
-                })}
-            </ul>
-
+            <List items={items}></List>
         </div>)
 
 }
-
-
-
 
 
 
