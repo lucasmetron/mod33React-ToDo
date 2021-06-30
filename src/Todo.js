@@ -16,9 +16,7 @@ function Todo() {
     }
 
     function onItemDeleted(item) {
-        console.log(item)
         let filteredItems = items.filter(it => {
-            console.log(it)
             return (
                 it.id !== item.id
             )

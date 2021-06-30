@@ -8,10 +8,11 @@ function List(props) {
                 return (
                     <li key={item.id}>
                         {item.text}
-                        <button onClick={() => { props.onItemDeleted(item) }}>Deletar</button>
+                        <button onClick={() => { props.onItemDeleted(item) }}> <img src="./assets/bin.png" alt="lixeira" /></button>
                     </li>
                 )
             })}
+
         </ul>
 
     )
