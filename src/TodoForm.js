@@ -12,7 +12,6 @@ function TodoForm(props) {
     function addItem(event) {
         event.preventDefault(); //este metodo evita que o button dentro do form envie para o action;
         if (text) {
-            // setItems([...items, text])
             props.onAddItem(text)
             setText("");
         }
