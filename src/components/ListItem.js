@@ -4,10 +4,8 @@ import Card from './Card';
 
 function DoneImg(props) {
     if (props.done) {
-        console.log(props.done, 'feito')
         return <img className="icon" src="./assets/on.png" alt="do" />
     } else {
-        console.log(props.done, "aguardando fazer")
         return <img className="icon" src="./assets/off.png" alt="done" />
     }
 }

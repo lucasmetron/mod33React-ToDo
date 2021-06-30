@@ -1,15 +1,19 @@
+function random() {
+    let number = parseInt(Math.random() * 10000);
 
+    return number;
+}
 class Item {
 
-    static lastId = 0; //server para gerar um numero de id para o obj
-
     constructor(text) {
-        this.id = Item.lastId++ //incrementa 1 ao lastId
+        this.id = random()
         this.text = text;
         this.done = false;
     }
 
 
 }
+
+//Poderia ter um objeto ao inves de uma classe, mas foi utilizado classe para treinar.
 
 export default Item

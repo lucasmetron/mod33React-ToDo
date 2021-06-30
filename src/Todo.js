@@ -25,6 +25,7 @@ function Todo() {
         localStorage.setItem(SAVED_ITEMS, JSON.stringify(items))
     }, [items])
 
+
     function onAddItem(text) {
 
         let it = new Item(text)
@@ -35,6 +36,7 @@ function Todo() {
 
     function onItemDeleted(item) {
         let filteredItems = items.filter(it => {
+            console.log(it)
             return (
                 it.id !== item.id
             )
