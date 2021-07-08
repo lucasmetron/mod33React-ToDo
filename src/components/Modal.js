@@ -4,7 +4,7 @@ import Card from "./Card";
 function Modal(props) {
 
     return (
-        <div id="modal" onClick={props.onHideModal} className={props.show ? "modal" : "modal hide"}>
+        <div id="modal" className={props.show ? "modal" : "modal hide"}>
             <Card className="cardModal">
                 {props.children}  {/* Desta maneira, o que for colocado dentro de <Modal>aqui</Modal>, será mostrado na tela*/}
             </Card>

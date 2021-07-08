@@ -1,35 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Todo.css'
 import List from './components/List';
 import TodoForm from './components/TodoForm';
-import Item from './components/Item';
 import Modal from './components/Modal';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'
 import listReducer from './reducers/listReducer';
 
-
-
 const SAVED_ITEMS = 'savedItems'
-const store = createStore(listReducer);
+
+function persistState(state) {
+    localStorage.setItem(SAVED_ITEMS, JSON.stringify(state))
+}
+
+function loadState() {
+    const actualState = localStorage.getItem(SAVED_ITEMS);
+    if (actualState) {
+        return JSON.parse(actualState)
+    } else {
+        return [];
+    }
+}
+
+const store = createStore(listReducer, loadState());
+
+store.subscribe(() => {
+    persistState(store.getState())
+})
 
 function App() {
 
-    const [items, setItems] = useState([]);
-    const [showModal, setShowModal] = useState('false');
+    // const [items, setItems] = useState([]);
+    const [showModal, setShowModal] = useState(false);
 
-    useEffect(() => {
-        let savedItems = JSON.parse(localStorage.getItem(SAVED_ITEMS));
-        if (savedItems) {
-            setItems(savedItems);
-        }
+    // useEffect(() => {
+    //     let savedItems = JSON.parse(localStorage.getItem(SAVED_ITEMS));
+    //     if (savedItems) {
+    //         setItems(savedItems);
+    //     }
 
-        setShowModal(false)
-    }, []);
+    //     setShowModal(false)
+    // }, []);
 
-    useEffect(() => {
-        localStorage.setItem(SAVED_ITEMS, JSON.stringify(items))
-    }, [items])
+    // useEffect(() => {
+    //     localStorage.setItem(SAVED_ITEMS, JSON.stringify(items))
+    // }, [items])
 
 
     // function onAddItem(text) {
@@ -64,10 +79,9 @@ function App() {
 
 
     function onHideModal(e) {
-        let target = e.target;
-        if (target.id === 'modal') {
-            setShowModal(false)
-        }
+
+        setShowModal(showModal !== showModal)
+
     }
 
     return (
@@ -76,8 +90,8 @@ function App() {
                 <header className="header">
                     <h1>To Do</h1> <button className="addButton" onClick={() => { setShowModal(true) }}>+</button>
                 </header>
-                <List onDone={onDone} onItemDeleted={onItemDeleted} items={items}></List>
-                <Modal show={showModal} onHideModal={onHideModal}><TodoForm onAddItem={onAddItem}></TodoForm></Modal>
+                <List></List>
+                <Modal show={showModal} onHideModal={onHideModal}><TodoForm onHideModal={onHideModal} ></TodoForm></Modal>
             </Provider>
         </div>)
 
